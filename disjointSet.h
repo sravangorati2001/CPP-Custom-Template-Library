@@ -31,6 +31,7 @@ int sz;
   int x=find(a),y=find(b);
   if(x!=y){
       sz--;
+      if(parent[x]<parent[y]) swap(x,y);
       parent[x]+=parent[y];
      parent[y]=x;
   }
