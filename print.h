@@ -10,32 +10,68 @@
 
 
 template<typename T>
-std::ostream &operator<<(std:: ostream &output, std::vector<T> v) { 
+std::ostream &operator<<(std:: ostream &output, std::vector<T> &v) { 
      int n=v.size();
          output<<"[";
          for(int i=0;i<n-1;i++)
          output<<v[i]<<",";
          output<<v[n-1]<<"]";
-         return output;            
+         return output;     
+         }       
+std::ostream &operator<<( std::ostream &output, std::set<string> &s) { 
+      auto it=s.end();
+       it--;
+         output<<"[\"";
+         for(auto i=begin(s);i!=it;i++)
+         output<<*i<<"\",";
+         output<<"\""<<*it<<"\"]";
+        return output;    
+     }
+std::ostream &operator<<( std::ostream &output, std::set<char> &s) { 
+      auto it=s.end();
+       it--;
+         output<<"[\'";
+         for(auto i=begin(s);i!=it;i++)
+         output<<*i<<"\',";
+         output<<"\'"<<*it<<"\']";
+         return output;   
       }
-template<typename T>
-std::ostream &operator<<( std::ostream &output, std::set<T> s) { 
+ template<typename T>
+std::ostream &operator<<( std::ostream &output, std::set<T> &s) { 
       auto it=s.end();
        it--;
          output<<"[";
          for(auto i=begin(s);i!=it;i++)
          output<<*i<<",";
          output<<*it<<"]";
-         return output;            
-      }
+         return output; 
+      }       
 template<typename T1,typename T2>
-std::ostream &operator<<( std::ostream &output, std::map<T1,T2> m) { 
+std::ostream& operator <<( std::ostream &output, std::map<T1,T2> &m) { 
       auto it=m.end();
        it--;
          output<<"[";
          for(auto i=begin(m);i!=it;i++)
          output<<"["<<(*i).first<<","<<(*i).second<<"],";
          output<<"["<<(*it).first<<","<<(*it).second<<"]]";
+         return output;            
+      }  
+std::ostream& operator <<( std::ostream &output, std::map<string,int> &m) { 
+      auto it=m.end();
+       it--;
+         output<<"[";
+         for(auto i=begin(m);i!=it;i++)
+         output<<"[\""<<(*i).first<<"\","<<(*i).second<<"],";
+         output<<"[\""<<(*it).first<<"\","<<(*it).second<<"]]";
+         return output;            
+      }   
+std::ostream& operator <<( std::ostream &output, std::map<char,int> &m) { 
+      auto it=m.end();
+       it--;
+         output<<"[";
+         for(auto i=begin(m);i!=it;i++)
+         output<<"[\'"<<(*i).first<<"\',"<<(*i).second<<"],";
+         output<<"[\'"<<(*it).first<<"\',"<<(*it).second<<"]]";
          return output;            
       }      
  template<std::size_t n>
@@ -47,7 +83,7 @@ std::ostream &operator<<( std::ostream &output, int (&v)[n]) {
          return output;            
       }     
 template<typename T>
-std::ostream &operator<<( std::ostream &output, std::vector<std::vector<T>> v) { 
+std::ostream& operator<<( std::ostream &output, std::vector<std::vector<T>> &v) { 
      int n=v.size(),m=v[0].size();
          output<<"[";
          for(int i=0;i<n-1;i++){
@@ -64,4 +100,19 @@ std::ostream &operator<<( std::ostream &output, std::vector<std::vector<T>> v) {
          return output;            
       }
 
+template<typename T1,typename T2>
+ostream & operator<<(ostream &out,pair<T1,T2> &p){
+ out<<"["<<p.first<<","<<p.second<<"]";
+  return out;
+}
+template<typename T1>
+ostream & operator<<(ostream &out,pair<string,T1> &p){
+  out<<"["<<"\""<<p.first<<"\","<<p.second<<"]";
+  return out;
+}
+template<typename T1>
+ostream & operator<<(ostream &out,pair<char,T1> &p){
+  out<<"["<<"\'"<<p.first<<"\',"<<p.second<<"]";
+  return out;
+}
       #endif
